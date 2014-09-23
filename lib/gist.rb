@@ -99,7 +99,7 @@ module Gist
 			@description = description
 			@source_files = Hash.new
 			filenames.each do |filename|
-				@source_files[filename] = {
+				@source_files[File.basename(filename)] = {
 					"content" => load_code(filename) 
 				}
 			end

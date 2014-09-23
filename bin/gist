@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../lib/gist', __FILE__) # Require the Gist library files
+require 'optparse'
+
+options = Hash.new
+OptionParser.new do |opts|
+	opts.banner = "Usage: gist [options] files"
+	opts.on("-u", "--user", "Post as user") do |u|
+		options[:user] = u
+	end
+
+	opts.on("-s", "--sign-in", "Sign in as user") do |s|
+		options[:sign_in] = s
+	end
+
+	opts.on("--sign-out", "Clear out saved user") do |s|
+		options[:sign_out] = s
+	end
+
+	opts.on("-p", "--public", "Make the gist public") do |p|
+		options[:public] = p
+	end
+
+	opts.on("-d [DESC]", "--description [DESC]", String, "Description of the gist") do |d|
+		options[:description] = d
+	end
+end.parse!
+
+# Copy ARGV into another array then clear it, to make gets behave properly
+files = ARGV.clone
+ARGV.clear
+
+if options[:sign_out] then
+	if File.exists?("#{Dir.home}/.gistruby/oauth_token") then
+		File.delete("#{Dir.home}/.gistruby/oauth_token")
+	end
+	exit
+end
+
+if options[:sign_in] then
+	print "Username: "
+	username = gets.chomp
+	password = Gist::Helpers::get_password()
+	@user = Gist::User.new(username, password)
+	@user.authenticate
+end
+
+if options[:user] then
+	@user = Gist::User.new
+	@user.authenticate
+	unless @user.authentication_token then
+		puts "ERROR: There is no user saved. You need to sign in."
+		exit
+	end
+	post = Gist::Post.new(files, options[:public], options[:description], @user)
+else
+	post = Gist::Post.new(files, options[:public], options[:description])
+end
+gist_url = post.submit
+puts gist_url

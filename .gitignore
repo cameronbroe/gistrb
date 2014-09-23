@@ -1,0 +1,8 @@
+# Don't add sublime project files
+*sublime*
+
+# Don't add the Gemfile.lock
+Gemfile.lock
+
+# Also, ignore the config file
+lib/config.rb

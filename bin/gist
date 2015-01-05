@@ -24,6 +24,10 @@ OptionParser.new do |opts|
 	opts.on("-d [DESC]", "--description [DESC]", String, "Description of the gist") do |d|
 		options[:description] = d
 	end
+
+	opts.on("-c", "--clipboard", "Save the gist URL to clipboard") do |c|
+		options[:clipboard] = c
+	end
 end.parse!
 
 # Copy ARGV into another array then clear it, to make gets behave properly
@@ -57,4 +61,9 @@ else
 	post = Gist::Post.new(files, options[:public], options[:description])
 end
 gist_url = post.submit
+
+if options[:clipboard] then
+		Clipboard::copy(gist_url)
+end
+
 puts gist_url

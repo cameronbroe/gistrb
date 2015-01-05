@@ -2,6 +2,7 @@ require 'net/http'
 require 'net/https'
 require 'highline/import'
 require 'json'
+require 'clipboard'
 require_relative './config.rb'
 
 module Gist
@@ -12,7 +13,7 @@ module Gist
 	CLIENT_SECRET = Gist::Config::CLIENT_SECRET
 
 	class User
-		attr_accessor :username 
+		attr_accessor :username
 		attr_accessor :password
 		attr_accessor :authentication_token # OAuth 2 token
 
@@ -100,7 +101,7 @@ module Gist
 			@source_files = Hash.new
 			filenames.each do |filename|
 				@source_files[File.basename(filename)] = {
-					"content" => load_code(filename) 
+					"content" => load_code(filename)
 				}
 			end
 			@http = Net::HTTP.new(Gist::API_URL, Gist::API_PORT)
@@ -137,6 +138,13 @@ module Gist
 	class Helpers
 		def Helpers::get_password(prompt="Password: ")
 			ask(prompt) { |q| q.echo = false }
+		end
+	end
+
+	class Clipboard
+		def Clipboard::copy(str)
+			Clipboard.clear()
+			Clipboard.copy(str)
 		end
 	end
 end

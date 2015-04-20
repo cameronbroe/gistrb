@@ -97,7 +97,7 @@ module Gist
 		def initialize(filenames, pub=false, description=nil, user=nil)
 			@authenticated_user = user
 			@public = pub
-			@description = description
+			if description then @description = description else @description = "" end
 			@source_files = Hash.new
 			filenames.each do |filename|
 				@source_files[File.basename(filename)] = {

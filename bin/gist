@@ -53,7 +53,7 @@ if options[:user] then
 	@user = Gist::User.new
 	@user.authenticate
 	unless @user.authentication_token then
-		puts "ERROR: There is no user saved. You need to sign in."
+		STDERR.puts "ERROR: There is no user saved. You need to sign in."
 		exit
 	end
 	post = Gist::Post.new(files, options[:public], options[:description], @user)

@@ -1,4 +1,3 @@
-require 'net/http'
 require 'net/https'
 require 'highline/import'
 require 'json'
@@ -13,9 +12,9 @@ require 'gist/clipboard'
 require_relative './config.rb'
 
 module Gist
-	# Module level constants
-	API_URL = "api.github.com"
-	API_PORT = 443
-	CLIENT_ID = Gist::Config::CLIENT_ID
-	CLIENT_SECRET = Gist::Config::CLIENT_SECRET
+  # Module level constants
+  API_URL = 'api.github.com'.freeze
+  API_PORT = 443
+
+  ACCESS_TOKEN_PATH = "#{Dir.home}/.gistrb/access_token".freeze
 end

@@ -1,4 +1,4 @@
-# gist - A command-line utility to post files directly as Gists on GitHub.com
+# gistrb - A command-line utility to post files directly as Gists on GitHub.com
 ### Description:
 This is a utility to easily post local source files you have on GitHub Gists. It
 supports uploading multi-file Gists, authenticated Gists, anonymous Gists, and
@@ -21,9 +21,8 @@ Option                                 | Description
  -c &#124; --clipboard                 | Automatically put the created Gist URL into your clipboard (beta)
 
 ## Installation:
-I will provide detailed installation instructions at another date. Currently, it
-is just suggested to clone the repo and replace the dummy config.rb files GitHub API
-credentials with your own. I will not provide my API secret or key.
+Using RubyGems, simply run this command:
+`gem install gistrb`
 
 ## Requirements:
 If on Linux, you need to have xclip installed for clipboard support

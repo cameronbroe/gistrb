@@ -50,7 +50,7 @@ end
 if options[:user]
   @user = Gist::User.new
   @user.authenticate
-  unless @user.authentication_token
+  unless @user.access_token
     STDERR.puts 'ERROR: There is no user saved. You need to sign in.'
     exit
   end

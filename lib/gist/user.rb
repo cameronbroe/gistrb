@@ -3,7 +3,7 @@ module Gist
   class User
     attr_accessor :username
     attr_accessor :password
-    attr_accessor :acess_token # Personal access token
+    attr_accessor :access_token # Personal access token
 
     # Create the GistUser instance
     def initialize(username = nil, password = nil)
@@ -22,15 +22,15 @@ module Gist
       @http.start do |http|
         response = http.request(auth_obj)
         json_response = JSON.parse(response.body)
-        @authentication_token = json_response['token']
+        @access_token = json_response['token']
       end
       # Then save
       save
-      populate_methods(get_user_info)
+      populate_methods(user_info)
     end
 
     private def user_info
-      headers = { 'Authorization' => "token #{authentication_token}" }
+      headers = { 'Authorization' => "token #{access_token}" }
       response = @http.get('/user', headers)
       JSON.parse(response.body)
     end
@@ -49,8 +49,8 @@ module Gist
       unless Dir.exist?(File.dirname(Gist::ACCESS_TOKEN_PATH))
         Dir.mkdir(File.dirname(Gist::ACCESS_TOKEN_PATH))
       end
-      token_file = File.new(Gist::ACCESS_TOKEN_PATH, '0600')
-      token_file << @authentication_token
+      token_file = File.new(Gist::ACCESS_TOKEN_PATH, 'w+')
+      token_file << @access_token
       token_file.close
     end
 

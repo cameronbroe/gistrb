@@ -9,8 +9,6 @@ require 'gist/post'
 require 'gist/helpers'
 require 'gist/clipboard'
 
-require_relative './config.rb'
-
 module Gist
   # Module level constants
   API_URL = 'api.github.com'.freeze

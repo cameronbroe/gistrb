@@ -8,6 +8,7 @@ module Gist
       @user ||= user
       @public ||= pub
       @description ||= description ? description : ''
+      @source_files ||= {}
       populate_source_files(filenames)
       @http = Net::HTTP.new(Gist::API_URL, Gist::API_PORT)
       @http.use_ssl = true
@@ -19,11 +20,12 @@ module Gist
         'public' => @public,
         'description' => @description
       }.to_json
+      headers ||= {}
       unless @user.nil?
-        headers['Authorization'] = "token #{@user.authentication_token}"
+        headers['Authorization'] = "token #{@user.access_token}"
       end
       response = @http.post('/gists', body, headers)
-      JSON.parse(response)['html_url']
+      JSON.parse(response.body)['html_url']
     end
 
     private

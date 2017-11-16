@@ -1,8 +1,6 @@
 language: ruby
 rvm:
 - 2.2
-- jruby-19mode
-- rbx-2
 before_install: gem install bundler -v 1.15
 deploy:
   provider: rubygems

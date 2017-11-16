@@ -14,7 +14,12 @@ module Gist
       @http.use_ssl = true
     end
 
-    def submit
+    def submit(stdin)
+    	unless stdin.nil? then
+    		@source_files['STDIN'] = {
+    			'content' => stdin
+    		}
+    	end
       body = {
         'files' => @source_files,
         'public' => @public,

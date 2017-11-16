@@ -7,7 +7,17 @@ declaring the Gists as private or public. You can also attach descriptions to th
 ## Usage:
 
 ```shell
-gist [opts] source_file source_file2
+gistrb [opts] source_file source_file2 ...
+```
+
+`gistrb` also supports input from STDIN. If `gistrb` is invoked with no files and nothing piped in, then it will wait
+on the terminal for input from STDIN until it reads an EOF character. An EOF character can be inserted on the terminal using Ctrl+D.
+
+Any files in the Gist from STDIN will be labelled as "STDIN".
+
+```shell
+$ cat foo.txt | gistrb [opts] source_file # Reads foo.txt from piped STDIN and source_file as a file.
+$ gistrb [opts] # Waits until it reads Ctrl+D and processes that data as STDIN
 ```
 
 ## Options:
@@ -32,14 +42,7 @@ To install this on Ubuntu-based distributions, run the following command.
 sudo apt-get install xclip
 ```
 
-## Some Information
-This utility has only been tested on an Ubuntu Linux based machine. Ideally, it'll
-run under any Linux environment. I can not guarantee this utility will work under OS X or Windows.
-
-The sign-in system simply stores your OAuth key for the application inside a directory named .gistruby in a non-encrypted file.
-Take this information and use at your own risk.
-
 ## License
 MIT License
 
-Copyright &copy; 2015 Cameron Roe
+Copyright &copy; 2017 Cameron Roe

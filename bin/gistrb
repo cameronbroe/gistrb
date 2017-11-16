@@ -34,6 +34,11 @@ end.parse!
 files = ARGV.clone
 ARGV.clear
 
+# Get anything sent by STDIN to support cat and pasting.
+if !STDIN.tty? || files.empty? then
+	stdin = STDIN.read
+end
+
 if options[:sign_out]
   File.delete(Gist::ACCESS_TOKEN_PATH) if File.exist?(Gist::ACCESS_TOKEN_PATH)
   exit
@@ -58,7 +63,7 @@ if options[:user]
 else
   post = Gist::Post.new(files, options[:public], options[:description])
 end
-gist_url = post.submit
+gist_url = post.submit(stdin)
 
 Clipboard.copy(gist_url) if options[:clipboard]
 

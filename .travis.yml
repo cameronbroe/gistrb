@@ -1,5 +1,14 @@
-sudo: false
 language: ruby
 rvm:
-  - 2.2.7
-before_install: gem install bundler -v 1.15.4
+- 2.2
+- jruby-19mode
+- rbx-2
+before_install: gem install bundler -v 1.15
+deploy:
+  provider: rubygems
+  api_key:
+    secure: RmgCZqvJKcpDPrxNsJrivxChVcaPNaJfIpdWCPnhIR/uM8kkD3dXF+dOvtUOXsOn8uO2EbFOPYv8dEcQd3bQaNhgdOrPdg+Z47nf6LphKpDKemmUS2DskepJUG1q0lCHhG5V3v8XIDUdT78ZpyNGh9KQ5ineFVgOJ+oQuxUzkUc=
+  gem: gistrb
+  on:
+    tags: true
+    repo: cameronbroe/gistrb

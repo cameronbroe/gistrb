@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'clipboard', '~> 1.1'
   spec.add_dependency 'ffi', '~> 1.9.18' if RUBY_PLATFORM =~ /win32/i
   spec.add_dependency 'highline', '~> 1.7'
+  spec.add_dependency 'netrc', '~> 0.11.0'
 end

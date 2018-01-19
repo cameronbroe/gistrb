@@ -15,27 +15,23 @@ module Gist
     end
 
     def submit(stdin)
-    	unless stdin.nil? then
-    		@source_files['STDIN'] = {
-    			'content' => stdin
-    		}
-    	end
+      unless stdin.nil?
+        @source_files['STDIN'] = {
+          'content' => stdin
+        }
+      end
       body = {
         'files' => @source_files,
         'public' => @public,
         'description' => @description
       }.to_json
       headers ||= {}
-      unless @user.nil?
-        headers['Authorization'] = "token #{@user.access_token}"
-      end
+      headers['Authorization'] = "token #{@user.access_token}" unless @user.nil?
       response = @http.post('/gists', body, headers)
       JSON.parse(response.body)['html_url']
     end
 
-    private
-
-    def load_code(filename)
+    private def load_code(filename)
       file = File.open(filename)
       file_str = ''
       file.each do |line|

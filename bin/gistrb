@@ -13,6 +13,10 @@ OptionParser.new do |opts|
     options[:sign_in] = s
   end
 
+  opts.on('-n', '--netrc', 'Use information from netrc when signing in') do |n|
+    options[:netrc] = n
+  end
+
   opts.on('--sign-out', 'Clear out saved user') do |s|
     options[:sign_out] = s
   end
@@ -34,11 +38,6 @@ end.parse!
 files = ARGV.clone
 ARGV.clear
 
-# Get anything sent by STDIN to support cat and pasting.
-if !STDIN.tty? || files.empty? then
-	stdin = STDIN.read
-end
-
 if options[:sign_out]
   File.delete(Gist::ACCESS_TOKEN_PATH) if File.exist?(Gist::ACCESS_TOKEN_PATH)
   exit
@@ -48,12 +47,16 @@ if options[:sign_in]
   print 'Username: '
   username = gets.chomp
   password = Gist::Helpers.get_password
-  @user = Gist::User.new(username, password)
+  @user = Gist::User.new(username, password, options[:netrc])
   @user.authenticate
+  exit
 end
 
+# Get anything sent by STDIN to support cat and pasting.
+stdin = STDIN.read if !STDIN.tty? || files.empty?
+
 if options[:user]
-  @user = Gist::User.new
+  @user = Gist::User.new(nil, nil, options[:netrc])
   @user.authenticate
   unless @user.access_token
     STDERR.puts 'ERROR: There is no user saved. You need to sign in.'

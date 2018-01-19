@@ -2,6 +2,8 @@ require 'net/https'
 require 'highline/import'
 require 'json'
 require 'clipboard'
+require 'netrc'
+require 'socket'
 
 # Library requires
 require 'gist/user'

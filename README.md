@@ -29,6 +29,7 @@ Option                                 | Description
  -p &#124; --public                    | Post the Gist as public (it posts as private by default)
  -d [DESC] &#124; --description [DESC] | Use [DESC] as the description for the Gist
  -c &#124; --clipboard                 | Automatically put the created Gist URL into your clipboard (beta)
+ -n &#124; --netrc                     | Utilize .netrc file for storing/retrieving authorization token
 
 ## Installation:
 Using RubyGems, simply run this command:
@@ -45,4 +46,4 @@ sudo apt-get install xclip
 ## License
 MIT License
 
-Copyright &copy; 2017 Cameron Roe
+Copyright &copy; 2018 Cameron Roe

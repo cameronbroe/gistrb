@@ -1,5 +1,3 @@
-require 'pry'
-
 module Gist
   # Class to hold user information
   class User

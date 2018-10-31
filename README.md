@@ -1,4 +1,6 @@
 # gistrb - A command-line utility to post files directly as Gists on GitHub.com
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcameronbroe%2Fgistrb.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcameronbroe%2Fgistrb?ref=badge_shield)
+
 ### Description:
 This is a utility to easily post local source files you have on GitHub Gists. It
 supports uploading multi-file Gists, authenticated Gists, anonymous Gists, and
@@ -47,3 +49,6 @@ sudo apt-get install xclip
 MIT License
 
 Copyright &copy; 2018 Cameron Roe
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcameronbroe%2Fgistrb.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcameronbroe%2Fgistrb?ref=badge_large)
